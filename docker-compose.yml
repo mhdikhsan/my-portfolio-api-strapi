@@ -15,8 +15,6 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    command: >
-      sh -c "npm run build && npm run develop"
     depends_on:
       - postgres
 
