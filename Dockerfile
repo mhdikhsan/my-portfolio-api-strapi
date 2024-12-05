@@ -1,15 +1,16 @@
-# Use the official Node.js image.
-# https://hub.docker.com/_/node
-FROM node:18-alpine
+FROM node:20-alpine
 
 # Set the working directory
 WORKDIR /usr/src/app
 
-# Copy the package.json and package-lock.json
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install the dependencies
+# Install dependencies
 RUN npm install
+
+# Force install sharp for alpine
+RUN npm install --force @img/sharp-linuxmusl-arm64
 
 # Copy the rest of the application code
 COPY . .
@@ -22,4 +23,3 @@ EXPOSE 1337
 
 # Start the application
 CMD ["npm", "run", "develop"]
-
