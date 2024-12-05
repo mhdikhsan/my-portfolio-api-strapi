@@ -1,11 +1,10 @@
-version: '3'
-
 services:
   strapi:
     build: .
     ports:
       - '1337:1337'
     environment:
+      NODE_ENV: 'development'
       DATABASE_CLIENT: 'postgres'
       DATABASE_HOST: 'postgres'
       DATABASE_PORT: 5432
@@ -16,6 +15,8 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
+    command: >
+      sh -c "npm run build && npm run develop"
     depends_on:
       - postgres
 
